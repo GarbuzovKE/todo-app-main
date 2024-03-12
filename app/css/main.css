@@ -1,0 +1,312 @@
+/* 
+    Typography
+*/
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
+:root {
+  --text-base-size: 1em;
+  --text-scale-ratio: 1.2;
+  --text-xs: calc((1em / var(--text-scale-ratio)) / var(--text-scale-ratio));
+  --text-sm: calc(var(--text-xs) * var(--text-scale-ratio));
+  --text-md: calc(
+    var(--text-sm) * var(--text-scale-ratio) * var(--text-scale-ratio)
+  );
+  --text-lg: calc(var(--text-md) * var(--text-scale-ratio));
+  --text-xl: calc(var(--text-lg) * var(--text-scale-ratio));
+  --text-xxl: calc(var(--text-xl) * var(--text-scale-ratio));
+  --text-xxxl: calc(var(--text-xxl) * var(--text-scale-ratio));
+}
+
+.text-xs {
+  font-size: var(--text-xs);
+}
+
+.text-sm {
+  font-size: var(--text-sm);
+}
+
+.text-md {
+  font-size: var(--text-md);
+}
+
+.text-lg {
+  font-size: var(--text-lg);
+}
+
+.text-xl {
+  font-size: var(--text-xl);
+}
+
+.text-xxl {
+  font-size: var(--text-xxl);
+}
+
+.text-xxxl {
+  font-size: var(--text-xxxl);
+}
+
+/* 
+    Boilerplate
+*/
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+button {
+  font: inherit;
+  background: none;
+  color: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input {
+  background-color: inherit;
+  border: none;
+  font: inherit;
+}
+
+/* 
+    Colors
+*/
+:root {
+  --selected-blue: hsl(220, 98%, 61%);
+  --check-bg: linear-gradient( hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  --bg: hsl(240, 20%, 12%);
+  --item-bg: hsl(235, 24%, 19%);
+  --font-primary: hsl(236, 33%, 92%);
+  --font-sec: hsl(234, 11%, 52%);
+}
+
+/*
+### Primary
+
+- Bright Blue: hsl(220, 98%, 61%)
+- Check Background: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%)
+
+
+### Neutral
+
+### Light Theme
+
+- Very Light Gray: hsl(0, 0%, 98%)
+- Very Light Grayish Blue: hsl(236, 33%, 92%)
+- Light Grayish Blue: hsl(233, 11%, 84%)
+- Dark Grayish Blue: hsl(236, 9%, 61%)
+- Very Dark Grayish Blue: hsl(235, 19%, 35%)
+
+### Dark Theme
+
+- Very Dark Blue: hsl(235, 21%, 11%)
+- Very Dark Desaturated Blue: hsl(235, 24%, 19%)
+- Light Grayish Blue: hsl(234, 39%, 85%)
+- Light Grayish Blue (hover): hsl(236, 33%, 92%)
+- Dark Grayish Blue: hsl(234, 11%, 52%)
+- Very Dark Grayish Blue: hsl(233, 14%, 35%)
+- Very Dark Grayish Blue: hsl(237, 14%, 26%) */
+/* 
+    Shared classes
+*/
+.custom-checkbox-container, .item__label {
+  position: relative;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+.custom-checkbox-container input, .item__label input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.custom-checkbox-container input:checked ~ .custom-checkbox, .item__label input:checked ~ .custom-checkbox {
+  border: none;
+  background: var(--check-bg);
+}
+.custom-checkbox-container input:checked ~ .custom-checkbox .custom-checkbox__fill, .item__label input:checked ~ .custom-checkbox .custom-checkbox__fill {
+  display: none;
+}
+
+@media (hover: hover) {
+  .custom-checkbox-container:hover input ~ .custom-checkbox {
+    border: none;
+    background: var(--check-bg);
+  }
+}
+.custom-checkbox {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--font-sec);
+  border-radius: 50%;
+  background-color: var(--item-bg);
+}
+.custom-checkbox__fill {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  right: 1px;
+  bottom: 1px;
+  border-radius: 50%;
+  background: var(--item-bg);
+}
+
+/* 
+    Todo item
+*/
+#list-container {
+  background-color: var(--item-bg);
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+}
+#list-container input:checked ~ label {
+  color: var(--font-sec);
+  text-decoration: line-through;
+}
+#list-container > label {
+  display: flex;
+  align-items: center;
+}
+
+.list-container__footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  color: var(--font-sec);
+}
+
+.item__label {
+  display: flex;
+  flex-grow: 1;
+  padding: 1rem;
+  align-items: center;
+  margin-right: 0;
+}
+.item__label .custom-checkbox {
+  margin-right: 0.5rem;
+}
+.item__label label {
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid hsl(233, 14%, 35%);
+}
+
+.remove-item {
+  padding: 1rem;
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .remove-item:hover > img {
+    scale: 150%;
+  }
+}
+@media (hover: none) {
+  .remove-item:active > img {
+    scale: 150%;
+  }
+}
+/* 
+    Add item
+*/
+.add-item-form {
+  margin-top: 1rem;
+}
+
+#add-item-form {
+  background-color: var(--item-bg);
+  display: flex;
+  padding: 1rem;
+  border-radius: 5px;
+  /*     box-shadow: 0 0 20px var(--bg); */
+}
+#add-item-form input {
+  color: var(--font-primary);
+  width: 85%;
+}
+#add-item-form input::-moz-placeholder {
+  color: var(--font-sec);
+}
+#add-item-form input::placeholder {
+  color: var(--font-sec);
+}
+#add-item-form label:first-child {
+  position: absolute;
+  left: -1000px;
+}
+
+/* 
+    Main
+*/
+body {
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 18px;
+  background: no-repeat url("../../images/bg-mobile-dark.jpg");
+  background-color: var(--bg);
+}
+body[data-theme=dark] {
+  color: var(--font-primary);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 1rem;
+  width: 85%;
+  margin-top: 3rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.header h1 {
+  letter-spacing: 5px;
+}
+
+.status-bar {
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+  border-radius: 5px;
+  background-color: var(--item-bg);
+  gap: 1rem;
+  color: var(--font-sec);
+}
+.status-bar__button:hover {
+  color: white;
+}
+.status-bar .selected {
+  color: var(--selected-blue);
+}
+
+.d-none {
+  display: none;
+}
+
+.info {
+  color: var(--font-sec);
+  text-align: center;
+  margin-top: 1rem;
+}/*# sourceMappingURL=main.css.map */

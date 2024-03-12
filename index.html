@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="./app/css/main.css" />
+    <script type="module" src="./app/js/main.js" defer> </script>
+
+    <title>Frontend Mentor | Todo app</title>
+  </head>
+  <body data-theme="dark">
+    <main>
+      <section class="header">
+        <div class="wrapper">
+          <h1>TODO</h1>
+        </div>
+        <div class="theme-toggle">
+          <!-- TODO: Add theme toggle-->
+          theme toggle
+        </div>
+      </section>
+
+      <section class="add-item-form">
+        <form id="add-item-form">
+          <label for="new-item">Enter a new to do item</label>
+          <label class="custom-checkbox-container">
+            <input type="checkbox" tabindex="-1" />
+            <!-- TODO: Can't check through tab navigation-->
+            <span class="custom-checkbox" tabindex="0">
+              <img src="./images/icon-check.svg" alt="check" />
+              <div class="custom-checkbox__fill"></div>
+            </span>
+          </label>
+          <input
+            id="new-item"
+            type="text"
+            size="40"
+            autocomplete="off"
+            placeholder="Create a new todo..."
+            class="text-sm"
+          />
+        </form>
+      </section>
+
+      <section id="list-container">
+        <div class="item">
+          <label class="item__label">
+            <input type="checkbox" tabindex="-1" id="1" />
+            <!-- TODO: Can't check through tab navigation-->
+            <span class="custom-checkbox" tabindex="0">
+              <img src="./images/icon-check.svg" alt="check" />
+              <div class="custom-checkbox__fill"></div>
+            </span>
+            <label for="1" class="text-sm"> Item text </label>
+          </label>
+          <button class="remove-item" title="Remove the item">
+            <img src="./images/icon-cross.svg" alt="remove item" />
+          </button>
+        </div>
+
+        <div class="item">
+          <label class="item__label">
+            <input type="checkbox" tabindex="-1" id="2" />
+            <!-- TODO: Can't check through tab navigation-->
+            <span class="custom-checkbox" tabindex="0">
+              <img src="./images/icon-check.svg" alt="check" />
+              <div class="custom-checkbox__fill"></div>
+            </span>
+            <label for="2" class="text-sm"> Item text </label>
+          </label>
+          <button class="remove-item" title="Remove the item">
+            <img src="./images/icon-cross.svg" alt="remove item" />
+          </button>
+        </div>
+
+        <div class="item">
+          <label class="item__label">
+            <input type="checkbox" tabindex="-1" id="3" />
+            <!-- TODO: Can't check through tab navigation-->
+            <span class="custom-checkbox" tabindex="0">
+              <img src="./images/icon-check.svg" alt="check" />
+              <div class="custom-checkbox__fill"></div>
+            </span>
+            <label for="3" class="text-sm"> Item text </label>
+          </label>
+          <button class="remove-item" title="Remove the item">
+            <img src="./images/icon-cross.svg" alt="remove item" />
+          </button>
+        </div>
+
+        <div class="item">
+          <label class="item__label">
+            <input type="checkbox" tabindex="-1" id="4" />
+            <!-- TODO: Can't check through tab navigation-->
+            <span class="custom-checkbox" tabindex="0">
+              <img src="./images/icon-check.svg" alt="check" />
+              <div class="custom-checkbox__fill"></div>
+            </span>
+            <label for="4" class="text-sm"> Item text </label>
+          </label>
+          <button class="remove-item" title="Remove the item">
+            <img src="./images/icon-cross.svg" alt="remove item" />
+          </button>
+        </div>
+
+        <div class="item">
+          <label class="item__label">
+            <input type="checkbox" tabindex="-1" id="5" />
+            <!-- TODO: Can't check through tab navigation-->
+            <span class="custom-checkbox" tabindex="0">
+              <img src="./images/icon-check.svg" alt="check" />
+              <div class="custom-checkbox__fill"></div>
+            </span>
+            <label for="5" class="text-sm"> Item text </label>
+          </label>
+          <button class="remove-item" title="Remove the item">
+            <img src="./images/icon-cross.svg" alt="remove item" />
+          </button>
+        </div>
+
+        <div class="list-container__footer">
+          <span class="items-left text-sm">x items left</span>
+
+          <div class="status-bar text-sm d-none">
+            <button class="status-bar__button selected">All</button>
+            <button class="status-bar__button">Active</button>
+            <button class="status-bar__button">Completed</button>
+          </div>
+
+          <button id="clear-button" title="Clear completed" class="text-sm">
+            Clear Completed
+          </button>
+        </div>
+      </section>
+
+      <div class="status-bar text-sm">
+        <button class="status-bar__button selected">All</button>
+        <button class="status-bar__button">Active</button>
+        <button class="status-bar__button">Completed</button>
+      </div>
+
+      <div class="info text-sm">Drag and drop to reorder list</div>
+    </main>
+  </body>
+</html>

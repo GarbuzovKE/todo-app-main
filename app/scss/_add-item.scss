@@ -1,0 +1,30 @@
+/* 
+    Add item
+*/
+
+.add-item-form{
+    margin-top: 1rem;
+}
+
+#add-item-form{
+    background-color: var(--item-bg);
+    display: flex;
+    padding: 1rem;
+    border-radius: 5px;
+/*     box-shadow: 0 0 20px var(--bg); */
+
+    input{
+        color: var(--font-primary);
+        width: 85%;
+        &::placeholder{
+            color: var(--font-sec);
+        }
+    }
+
+    label:first-child{
+        position: absolute;
+        left: -1000px;
+    }
+} 
+
+
