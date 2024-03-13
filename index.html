@@ -19,12 +19,10 @@
   <body data-theme="dark">
     <main>
       <section class="header">
-        <div class="wrapper">
-          <h1>TODO</h1>
-        </div>
-        <div class="theme-toggle">
-          <!-- TODO: Add theme toggle-->
-          theme toggle
+        
+        <h1>TODO</h1>
+        <button id="theme-toggle" title="Theme toggle">
+          <img src="./images/icon-sun.svg" alt="Sun icon">
         </div>
       </section>
 
@@ -42,7 +40,7 @@
           <input
             id="new-item"
             type="text"
-            size="40"
+            maxlength="50"
             autocomplete="off"
             placeholder="Create a new todo..."
             class="text-sm"
@@ -129,7 +127,7 @@
         <div class="list-container__footer">
           <span class="items-left text-sm">x items left</span>
 
-          <div class="status-bar text-sm d-none">
+          <div class="status-bar text-sm">
             <button class="status-bar__button selected">All</button>
             <button class="status-bar__button">Active</button>
             <button class="status-bar__button">Completed</button>

@@ -2,29 +2,48 @@
     Add item
 */
 
-.add-item-form{
-    margin-top: 1rem;
+.add-item-form {
+  margin-top: 1rem;
 }
 
-#add-item-form{
-    background-color: var(--item-bg);
-    display: flex;
-    padding: 1rem;
-    border-radius: 5px;
-/*     box-shadow: 0 0 20px var(--bg); */
+#add-item-form {
+  display: flex;
+  padding: 20px 20px 20px 25px;
+  border-radius: 5px;
 
-    input{
-        color: var(--font-primary);
-        width: 85%;
-        &::placeholder{
-            color: var(--font-sec);
-        }
+  input {
+    flex-grow: 1;
+  }
+
+  label:first-child {
+    position: absolute;
+    left: -1000px;
+  }
+
+  .custom-checkbox-container {
+    margin-right: 0.5rem;
+  }
+}
+
+body[data-theme="dark"] {
+  #add-item-form {
+    background-color: var(--item-bg-dark);
+    input {
+      color: var(--font-primary-dark);
+      &::placeholder {
+        color: var(--font-sec-dark);
+      }
     }
-
-    label:first-child{
-        position: absolute;
-        left: -1000px;
+  }
+}
+body[data-theme="light"] {
+  #add-item-form {
+    background-color: var(--item-bg-light);
+    input {
+      color: var(--font-primary-light);
+      &::placeholder {
+        color: var(--font-sec-light);
+      }
     }
-} 
-
-
+  }
+}

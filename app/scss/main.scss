@@ -17,10 +17,21 @@ body {
   flex-wrap: wrap;
   font-family: "Josefin Sans", sans-serif;
   font-size: 18px;
-  background: no-repeat url("../../images/bg-mobile-dark.jpg");
-  background-color: var(--bg);
+  background-size: contain;
   &[data-theme="dark"] {
-    color: var(--font-primary);
+    background: no-repeat url("../../images/bg-mobile-dark.jpg");
+    background-size: contain;
+    background-color: var(--bg-dark);
+    color: var(--font-primary-dark);
+  }
+  &[data-theme="light"] {
+    background: no-repeat url("../../images/bg-mobile-light.jpg");
+    background-size: contain;
+    background-color: var(--bg-light);
+    color: var(--font-primary-light);
+    h1 {
+      color: var(--item-bg-light);
+    }
   }
 }
 
@@ -30,8 +41,8 @@ main {
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 1rem;
-  width: 85%;
-  margin-top: 3rem;
+  width: clamp(340px, 70%, 500px);
+  margin-top: clamp(3rem, 10%, 6rem);
 }
 
 .header {
@@ -40,6 +51,10 @@ main {
   h1 {
     letter-spacing: 5px;
   }
+  button {
+    width: 25px;
+    height: 25px;
+  }
 }
 
 .status-bar {
@@ -47,23 +62,70 @@ main {
   justify-content: center;
   padding: 1em;
   border-radius: 5px;
-  background-color: var(--item-bg);
   gap: 1rem;
-  color: var(--font-sec);
-  &__button:hover {
-    color: white;
-  }
   .selected {
     color: var(--selected-blue);
   }
 }
 
-.d-none {
-  display: none;
-}
-
 .info {
-  color: var(--font-sec);
   text-align: center;
   margin-top: 1rem;
+}
+
+body[data-theme="dark"] {
+  .status-bar {
+    background-color: var(--item-bg-dark);
+    color: var(--font-sec-dark);
+
+    @media (hover: hover) {
+      &__button:hover {
+        color: var(--btn-hover-dark);
+      }
+    }
+  }
+  .info {
+    color: var(--font-sec-dark);
+  }
+}
+
+body[data-theme="light"] {
+  .status-bar {
+    background-color: var(--item-bg-light);
+    color: var(--font-sec-light);
+
+    @media (hover: hover) {
+      &__button:hover {
+        color: var(--btn-hover-light);
+      }
+    }
+
+  }
+
+  .info {
+    color: var(--font-sec-light);
+  }
+}
+
+@media screen and (min-width: 450px) {
+  body[data-theme="dark"] {
+    background: no-repeat url("../../images/bg-desktop-dark.jpg");
+    background-size: contain;
+    background-color: var(--bg-dark);
+  }
+  body[data-theme="light"] {
+    background: no-repeat url("../../images/bg-desktop-light.jpg");
+    background-size: contain;
+    background-color: var(--bg-light);
+  }
+}
+
+@media screen and (min-width: 600px) {
+  main > .status-bar {
+    display: none;
+  }
+  .list-container__footer > .status-bar {
+    padding: 0;
+    display: flex;
+  }
 }

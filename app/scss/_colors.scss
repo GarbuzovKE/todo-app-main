@@ -5,10 +5,16 @@
 :root{
     --selected-blue: hsl(220, 98%, 61%);
     --check-bg: linear-gradient( hsl(192, 100%, 67%), hsl(280, 87%, 65%));
-    --bg: hsl(240, 20%, 12%);
-    --item-bg: hsl(235, 24%, 19%);
-    --font-primary: hsl(236, 33%, 92%);
-    --font-sec: hsl(234, 11%, 52%);
+    --bg-dark: hsl(240, 20%, 12%);
+    --bg-light: hsl(236, 33%, 92%);
+    --item-bg-dark: hsl(235, 24%, 19%);
+    --item-bg-light: hsl(0, 0%, 98%);
+    --font-primary-dark: hsl(236, 33%, 92%);
+    --font-primary-light: hsl(235, 19%, 35%);
+    --font-sec-dark: hsl(234, 11%, 52%);
+    --font-sec-light: hsl(236, 9%, 61%);
+    --btn-hover-dark: white;
+    --btn-hover-light: hsl(235, 19%, 35%);
 }
 
 /*

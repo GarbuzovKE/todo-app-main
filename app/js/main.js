@@ -38,11 +38,17 @@ const initApp = () => {
     }
   }
 
+  const themeToggle = document.getElementById("theme-toggle");
+  themeToggle.addEventListener("click", (event) => {
+    changeTheme();
+  });
+
   //Procedural
   setAppDataToLocalStorage();
   loadListObject();
   refreshThePage();
   renderAppStatus();
+  updateTheme();
 };
 
 const loadListObject = () => {
@@ -83,7 +89,6 @@ const deleteContents = (parentElement) => {
 const renderList = () => {
   const storedAppStatus = localStorage.getItem("appStatus");
   const appStatus = JSON.parse(storedAppStatus);
-
   const list = toDoList.getList();
   list.forEach((item) => {
     if (appStatus == "All") {
@@ -256,3 +261,22 @@ const updatePersistentData = (listArray = null, appStatus = null) => {
     localStorage.setItem("appStatus", JSON.stringify(appStatus));
   }
 };
+
+const changeTheme = () => {
+  const dataTheme = document.body.getAttribute("data-theme");
+  if (dataTheme == "light") {
+    document.body.setAttribute("data-theme", "dark");
+    localStorage.setItem('theme', JSON.stringify('dark'))
+  } else {
+    document.body.setAttribute("data-theme", "light");
+    localStorage.setItem('theme', JSON.stringify('light'))
+  }
+};
+
+const updateTheme = ()=>{
+  const storedTheme = localStorage.getItem('theme');
+  const theme = JSON.parse(storedTheme);
+  if (theme){
+    document.body.setAttribute('data-theme', theme);
+  }
+}

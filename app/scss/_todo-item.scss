@@ -2,67 +2,100 @@
     Todo item
 */
 
-#list-container{
-    background-color: var(--item-bg);
+#list-container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  input:checked ~ label {
+    text-decoration: line-through;
+  }
+  > label {
     display: flex;
-    flex-direction: column;
-    border-radius: 5px;
-    input:checked ~ label{
-        color: var(--font-sec);
-        text-decoration: line-through;
-    }
-    >label{
-        display: flex;
-        align-items: center;
-    }
-}
-
-.list-container__footer{
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-    color: var(--font-sec);
-}
-
-.item__label{
-    display: flex;
-    flex-grow: 1;
-    padding: 1rem;
-
     align-items: center;
-    margin-right: 0;
-    .custom-checkbox{
-        margin-right: 0.5rem;
-    }
-    label{
-        flex-grow: 1;
-        cursor: pointer;
-    }
+  }
 }
 
-.item{
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid hsl(233, 14%, 35%);
+body[data-theme="dark"] {
+  #list-container {
+    background-color: var(--item-bg-dark);
+    input:checked ~ label {
+      color: var(--font-sec-dark);
+    }
+  }
+  .list-container__footer {
+    color: var(--font-sec-dark);
+  }
 }
 
-.remove-item{
-    padding: 1rem;
+body[data-theme="light"] {
+  #list-container {
+    background-color: var(--item-bg-light);
+    input:checked ~ label {
+      color: var(--font-sec-light);
+    }
+  }
+  .list-container__footer {
+    color: var(--font-sec-light);
+  }
+}
+
+.list-container__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  .status-bar {
+    display: none;
+  }
+}
+
+.item__label {
+  display: flex;
+  flex-grow: 1;
+  padding: 20px 0 20px 25px;
+
+  align-items: center;
+  margin-right: 0;
+  .custom-checkbox {
+    margin-right: 0.5rem;
+  }
+  label {
+    flex-grow: 1;
+    overflow-wrap: anywhere;
     cursor: pointer;
+  }
 }
 
-@media (hover:hover){
-    .remove-item:hover>img{
-        scale: 150%;
-    }     
+.item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid hsl(233, 14%, 35%);
 }
 
-@media (hover:none){
-    .remove-item:active>img{
-        scale: 150%;
-    }     
+.remove-item {
+  padding: 1rem;
+  cursor: pointer;
+  img {
+    width: 15px;
+  }
 }
 
+@media (hover: hover) {
+  .item:hover {
+    .remove-item {
+      visibility: visible;
+    }
+  }
+  .remove-item {
+    visibility: hidden;
+    &:hover > img {
+      scale: 150%;
+    }
+  }
+}
 
-
-
+@media (hover: none) {
+  .remove-item:active > img {
+    scale: 150%;
+  }
+}
