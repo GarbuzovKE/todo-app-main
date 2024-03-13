@@ -137,9 +137,10 @@ const processSubmission = () => {
   if (!newEntryText.length) return;
   const nextItemId = calcNextItemId();
   const toDoItem = createNewItem(nextItemId, newEntryText);
-  toDoList.addItemToList(toDoItem);
+  toDoList.unshiftItemToList(toDoItem);
   updatePersistentData(toDoList.getList());
   refreshThePage();
+  document.getElementById("new-item").blur();
 };
 
 const getNewEntry = () => {

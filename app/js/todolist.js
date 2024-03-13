@@ -20,6 +20,10 @@ export default class ToDoList {
     this._list.push(itemObj);
   }
 
+  unshiftItemToList(itemObj){
+    this._list.unshift(itemObj);
+  }
+
   removeItemFromList(id) {
     const list = this._list;
     for (let i = 0; i < list.length; i++) {

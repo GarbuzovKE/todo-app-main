@@ -83,6 +83,11 @@ body[data-theme="dark"] {
         color: var(--btn-hover-dark);
       }
     }
+    @media (hover: none) {
+      &__button:active {
+        color: var(--btn-hover-dark);
+      }
+    }
   }
   .info {
     color: var(--font-sec-dark);
@@ -96,6 +101,11 @@ body[data-theme="light"] {
 
     @media (hover: hover) {
       &__button:hover {
+        color: var(--btn-hover-light);
+      }
+    }
+    @media (hover: none) {
+      &__button:active {
         color: var(--btn-hover-light);
       }
     }

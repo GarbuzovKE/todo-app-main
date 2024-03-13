@@ -394,6 +394,11 @@ body[data-theme=dark] .status-bar {
     color: var(--btn-hover-dark);
   }
 }
+@media (hover: none) {
+  body[data-theme=dark] .status-bar__button:active {
+    color: var(--btn-hover-dark);
+  }
+}
 body[data-theme=dark] .info {
   color: var(--font-sec-dark);
 }
@@ -404,6 +409,11 @@ body[data-theme=light] .status-bar {
 }
 @media (hover: hover) {
   body[data-theme=light] .status-bar__button:hover {
+    color: var(--btn-hover-light);
+  }
+}
+@media (hover: none) {
+  body[data-theme=light] .status-bar__button:active {
     color: var(--btn-hover-light);
   }
 }
