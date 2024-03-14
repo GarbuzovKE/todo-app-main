@@ -4,7 +4,7 @@
 
 .custom-checkbox-container, .item__label{
     position: relative;
-    cursor: pointer;
+    cursor: move;
     
     input{
         position: absolute;
@@ -37,6 +37,7 @@
     min-width: 20px;
     height: 20px;
     border-radius: 50%;
+    cursor: pointer;
     &__fill{
         position: absolute;
         top: 1px;

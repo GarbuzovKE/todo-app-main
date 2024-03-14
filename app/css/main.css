@@ -121,7 +121,7 @@ input {
 */
 .custom-checkbox-container, .item__label {
   position: relative;
-  cursor: pointer;
+  cursor: move;
 }
 .custom-checkbox-container input, .item__label input {
   position: absolute;
@@ -151,6 +151,7 @@ input {
   min-width: 20px;
   height: 20px;
   border-radius: 50%;
+  cursor: pointer;
 }
 .custom-checkbox__fill {
   position: absolute;
@@ -236,13 +237,14 @@ body[data-theme=light] .list-container__footer {
 .item__label label {
   flex-grow: 1;
   overflow-wrap: anywhere;
-  cursor: pointer;
+  cursor: move;
 }
 
 .item {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid hsl(233, 14%, 35%);
+  cursor: move;
 }
 
 .remove-item {
