@@ -21,7 +21,7 @@ export default class ToDoItem{
         this._item = item;
     }
 
-    changeState(item){
+    changeState(){
         if (this._completed){
             this._completed = false;
             return;
