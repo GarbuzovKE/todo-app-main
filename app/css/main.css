@@ -126,8 +126,8 @@ input {
 .custom-checkbox-container input, .item__label input {
   position: absolute;
   opacity: 0;
-  width: 0;
-  height: 0;
+  width: 20px;
+  height: 20px;
 }
 .custom-checkbox-container input:checked ~ .custom-checkbox, .item__label input:checked ~ .custom-checkbox {
   border: none;
@@ -136,9 +136,12 @@ input {
 .custom-checkbox-container input:checked ~ .custom-checkbox .custom-checkbox__fill, .item__label input:checked ~ .custom-checkbox .custom-checkbox__fill {
   display: none;
 }
+.custom-checkbox-container input:focus, .item__label input:focus {
+  opacity: 1;
+}
 
 @media (hover: hover) {
-  .custom-checkbox-container:hover input ~ .custom-checkbox {
+  .custom-checkbox:hover, .custom-checkbox-container:hover .custom-checkbox {
     border: none;
     background: var(--check-bg);
   }

@@ -9,8 +9,8 @@
     input{
         position: absolute;
         opacity: 0; 
-        width: 0;
-        height: 0; 
+        width: 20px;
+        height: 20px; 
         &:checked ~ .custom-checkbox{
             border: none;
             background: var(--check-bg);
@@ -19,11 +19,14 @@
                 display: none;
             }
         }
+        &:focus{
+            opacity: 1;
+        }
     }
 }
 
 @media (hover:hover){
-    .custom-checkbox-container:hover input ~ .custom-checkbox{
+    .custom-checkbox:hover, .custom-checkbox-container:hover .custom-checkbox{
         border: none;
         background: var(--check-bg);
     }     

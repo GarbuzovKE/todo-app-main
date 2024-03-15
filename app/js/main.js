@@ -49,7 +49,6 @@ const initApp = () => {
   refreshThePage();
   renderAppStatus();
   updateTheme();
-/*   dragAndDrop(); */
 };
 
 const loadListObject = () => {
@@ -72,6 +71,7 @@ const refreshThePage = () => {
   clearItemEntryField();
   //setFocusOnItemEntry();
   setItemsLeft();
+  dragAndDrop();
 };
 
 const clearListDisplay = () => {
@@ -151,9 +151,14 @@ const getNewEntry = () => {
 const calcNextItemId = () => {
   let nextItemId = 1;
   const list = toDoList.getList();
-  if (list.length > 0) {
-    nextItemId = list[list.length - 1].getId() + 1;
+  if (list) {
+    for (const item of list) {
+      if (item.getId() >= nextItemId) {
+        nextItemId = item.getId() + 1;
+      }
+    }
   }
+
   return nextItemId;
 };
 
@@ -175,14 +180,12 @@ const buildListItem = (item) => {
   const check = document.createElement("input");
   check.type = "checkbox";
   check.id = item.getId();
-  check.tabIndex = -1;
   if (item.getState()) {
     check.checked = true;
   }
   addClickListenerToCheckbox(check, item);
   const customCheckbox = document.createElement("span");
   customCheckbox.className = "custom-checkbox";
-  customCheckbox.tabIndex = "0";
   const iconCheck = document.createElement("img");
   iconCheck.src = "./images/icon-check.svg";
   iconCheck.alt = "check";
@@ -288,12 +291,13 @@ const dragAndDrop = () => {
   const listItems = document.querySelectorAll(".item");
   for (const item of listItems) {
     item.draggable = true;
-    }
-  
+  }
 
   listContainer.addEventListener("dragstart", (event) => {
-    event.target.classList.add("drag-selected");
+    const dragStartElement = findItemParent(event.target);
+    dragStartElement.classList.add("drag-selected");
   });
+
   listContainer.addEventListener("dragend", (event) => {
     event.target.classList.remove("drag-selected");
   });
@@ -302,42 +306,65 @@ const dragAndDrop = () => {
     event.preventDefault();
 
     const activeItem = listContainer.querySelector(".drag-selected");
-    const dragOverItem = event.target;
-    console.log(`dragOver - ${dragOverItem.tagName}`);
+    let dragOverItem = event.target;
+    dragOverItem = findItemParent(dragOverItem);
+
     const isMoveable =
-      activeItem !== dragOverItem && dragOverItem.classList.contains("item");
+      dragOverItem &&
+      activeItem !== dragOverItem &&
+      dragOverItem.classList.contains("item");
 
     if (!isMoveable) {
-      console.log(activeItem, dragOverItem);
       return;
     }
 
-/*     const nextItem = getNextItem(event.clientY, dragOverItem);
+    //add class to find pos of elem in list
+    dragOverItem.classList.add("drag-target");
 
-    if (nextItem && activeItem === nextItem.previousElementSibling || activeItem === nextItem){
-      return
-    } */
+    const activeItemPosition = findPositionWithClass(
+      "drag-selected",
+      listContainer.children
+    );
+    const dragOverItemPosition = findPositionWithClass(
+      "drag-target",
+      listContainer.children
+    );
 
-    if (dragOverItem === activeItem){
-      return
-    }
-    
-    if (dragOverItem){
+    updateList(activeItemPosition, dragOverItemPosition);
+
+    if (activeItemPosition < dragOverItemPosition) {
       listContainer.insertBefore(activeItem, dragOverItem.nextElementSibling);
-      console.log('inserted');
+    } else {
+      listContainer.insertBefore(activeItem, dragOverItem);
     }
-    
-  }, true);
+    dragOverItem.classList.remove("drag-target");
+  });
 
-  /* const getNextItem = (cursorPosition, currentItem) =>{
-    const currentItemCoord = currentItem.getBoundingClientRect();
-    const currentItemCenter = currentItemCoord.y + currentItemCoord.height/2;
+  const findItemParent = (element) => {
+    if (element && !element.classList.contains("item")) {
+      const parent = findItemParent(element.parentElement);
+      return parent;
+    } else {
+      return element;
+    }
+  };
 
-    const nextItem = (cursorPosition < currentItemCenter) ? currentItem : 
-    currentItem.nextElementSibling;
+  const updateList = (firstItemPosition, secondItemPosition) => {
+    //delete firstItem from list, insert in correct position
+    const removedItem = toDoList.removeItemFromListPosition(firstItemPosition);
+    toDoList.insertItemToPosition(secondItemPosition, removedItem);
 
-    return nextItem;
-  } */
+    updatePersistentData(toDoList.getList());
+  };
 
-
+  const findPositionWithClass = (className, elementsList) => {
+    let i = 0;
+    for (let element of elementsList) {
+      if (element.classList.contains(className)) {
+        return i;
+      } else {
+        i++;
+      }
+    }
+  };
 };
