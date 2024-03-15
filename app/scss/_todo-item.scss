@@ -62,7 +62,7 @@ body[data-theme="light"] {
   label {
     flex-grow: 1;
     overflow-wrap: anywhere;
-    cursor: pointer;
+    cursor: move;
   }
 }
 
@@ -70,6 +70,7 @@ body[data-theme="light"] {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid hsl(233, 14%, 35%);
+  cursor: move;
 }
 
 .remove-item {

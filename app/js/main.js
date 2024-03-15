@@ -71,6 +71,7 @@ const refreshThePage = () => {
   clearItemEntryField();
   //setFocusOnItemEntry();
   setItemsLeft();
+  dragAndDrop();
 };
 
 const clearListDisplay = () => {
@@ -150,9 +151,14 @@ const getNewEntry = () => {
 const calcNextItemId = () => {
   let nextItemId = 1;
   const list = toDoList.getList();
-  if (list.length > 0) {
-    nextItemId = list[list.length - 1].getId() + 1;
+  if (list) {
+    for (const item of list) {
+      if (item.getId() >= nextItemId) {
+        nextItemId = item.getId() + 1;
+      }
+    }
   }
+
   return nextItemId;
 };
 
@@ -174,14 +180,12 @@ const buildListItem = (item) => {
   const check = document.createElement("input");
   check.type = "checkbox";
   check.id = item.getId();
-  check.tabIndex = -1;
   if (item.getState()) {
     check.checked = true;
   }
   addClickListenerToCheckbox(check, item);
   const customCheckbox = document.createElement("span");
   customCheckbox.className = "custom-checkbox";
-  customCheckbox.tabIndex = "0";
   const iconCheck = document.createElement("img");
   iconCheck.src = "./images/icon-check.svg";
   iconCheck.alt = "check";
@@ -267,17 +271,100 @@ const changeTheme = () => {
   const dataTheme = document.body.getAttribute("data-theme");
   if (dataTheme == "light") {
     document.body.setAttribute("data-theme", "dark");
-    localStorage.setItem('theme', JSON.stringify('dark'))
+    localStorage.setItem("theme", JSON.stringify("dark"));
   } else {
     document.body.setAttribute("data-theme", "light");
-    localStorage.setItem('theme', JSON.stringify('light'))
+    localStorage.setItem("theme", JSON.stringify("light"));
   }
 };
 
-const updateTheme = ()=>{
-  const storedTheme = localStorage.getItem('theme');
+const updateTheme = () => {
+  const storedTheme = localStorage.getItem("theme");
   const theme = JSON.parse(storedTheme);
-  if (theme){
-    document.body.setAttribute('data-theme', theme);
+  if (theme) {
+    document.body.setAttribute("data-theme", theme);
   }
-}
+};
+
+const dragAndDrop = () => {
+  const listContainer = document.querySelector("#list-container");
+  const listItems = document.querySelectorAll(".item");
+  for (const item of listItems) {
+    item.draggable = true;
+  }
+
+  listContainer.addEventListener("dragstart", (event) => {
+    const dragStartElement = findItemParent(event.target);
+    dragStartElement.classList.add("drag-selected");
+  });
+
+  listContainer.addEventListener("dragend", (event) => {
+    event.target.classList.remove("drag-selected");
+  });
+
+  listContainer.addEventListener("dragover", (event) => {
+    event.preventDefault();
+
+    const activeItem = listContainer.querySelector(".drag-selected");
+    let dragOverItem = event.target;
+    dragOverItem = findItemParent(dragOverItem);
+
+    const isMoveable =
+      dragOverItem &&
+      activeItem !== dragOverItem &&
+      dragOverItem.classList.contains("item");
+
+    if (!isMoveable) {
+      return;
+    }
+
+    //add class to find pos of elem in list
+    dragOverItem.classList.add("drag-target");
+
+    const activeItemPosition = findPositionWithClass(
+      "drag-selected",
+      listContainer.children
+    );
+    const dragOverItemPosition = findPositionWithClass(
+      "drag-target",
+      listContainer.children
+    );
+
+    updateList(activeItemPosition, dragOverItemPosition);
+
+    if (activeItemPosition < dragOverItemPosition) {
+      listContainer.insertBefore(activeItem, dragOverItem.nextElementSibling);
+    } else {
+      listContainer.insertBefore(activeItem, dragOverItem);
+    }
+    dragOverItem.classList.remove("drag-target");
+  });
+
+  const findItemParent = (element) => {
+    if (element && !element.classList.contains("item")) {
+      const parent = findItemParent(element.parentElement);
+      return parent;
+    } else {
+      return element;
+    }
+  };
+
+  const updateList = (firstItemPosition, secondItemPosition) => {
+    //delete firstItem from list, insert in correct position
+    const removedItem = toDoList.removeItemFromListPosition(firstItemPosition);
+    toDoList.insertItemToPosition(secondItemPosition, removedItem);
+
+    updatePersistentData(toDoList.getList());
+  };
+
+  const findPositionWithClass = (className, elementsList) => {
+    let i = 0;
+    for (let element of elementsList) {
+      if (element.classList.contains(className)) {
+        return i;
+      } else {
+        i++;
+      }
+    }
+  };
+};

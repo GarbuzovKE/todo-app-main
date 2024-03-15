@@ -9,8 +9,8 @@ export default class ToDoList {
 
   clearCompleted() {
     const list = this._list;
-    for (let i = list.length-1; i>=0; i--){
-      if (list[i].getState()){
+    for (let i = list.length - 1; i >= 0; i--) {
+      if (list[i].getState()) {
         list.splice(i, 1);
       }
     }
@@ -20,17 +20,25 @@ export default class ToDoList {
     this._list.push(itemObj);
   }
 
-  unshiftItemToList(itemObj){
+  unshiftItemToList(itemObj) {
     this._list.unshift(itemObj);
   }
 
   removeItemFromList(id) {
     const list = this._list;
     for (let i = 0; i < list.length; i++) {
-        if (list[i]._id == id){
-            list.splice(i, 1);
-            break;
-        }
+      if (list[i]._id == id) {
+        list.splice(i, 1);
+        break;
+      }
     }
+  }
+
+  insertItemToPosition(position, itemObj) {
+    this._list.splice(position, 0, itemObj);
+  }
+
+  removeItemFromListPosition(position) {
+    return this._list.splice(position, 1)[0];
   }
 }
