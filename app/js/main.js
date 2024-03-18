@@ -332,10 +332,8 @@ const dragAndDropInit = () => {
 
     if (activeItemPosition < dragOverItemPosition) {
       listContainer.insertBefore(activeItem, dragOverItem.nextElementSibling);
-      console.log("insert1");
     } else {
       listContainer.insertBefore(activeItem, dragOverItem);
-      console.log("insert2");
     }
     dragOverItem.classList.remove("drag-target");
   });
