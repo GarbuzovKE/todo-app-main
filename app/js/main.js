@@ -49,6 +49,7 @@ const initApp = () => {
   refreshThePage();
   renderAppStatus();
   updateTheme();
+  dragAndDropStart();
 };
 
 const loadListObject = () => {
@@ -71,7 +72,7 @@ const refreshThePage = () => {
   clearItemEntryField();
   //setFocusOnItemEntry();
   setItemsLeft();
-  dragAndDrop();
+  dragAndDropUpdate();
 };
 
 const clearListDisplay = () => {
@@ -286,9 +287,9 @@ const updateTheme = () => {
   }
 };
 
-const dragAndDrop = () => {
+const dragAndDropStart = () => {
   const listContainer = document.querySelector("#list-container");
-  const listItems = document.querySelectorAll(".item");
+  const listItems = listContainer.querySelectorAll(".item");
   for (const item of listItems) {
     item.draggable = true;
   }
@@ -334,8 +335,10 @@ const dragAndDrop = () => {
 
     if (activeItemPosition < dragOverItemPosition) {
       listContainer.insertBefore(activeItem, dragOverItem.nextElementSibling);
+      console.log("insert1");
     } else {
       listContainer.insertBefore(activeItem, dragOverItem);
+      console.log("insert2");
     }
     dragOverItem.classList.remove("drag-target");
   });
@@ -368,3 +371,12 @@ const dragAndDrop = () => {
     }
   };
 };
+
+const dragAndDropUpdate = () => {
+  //enable drageAndDrop if listItems were updated
+  const listContainer = document.querySelector("#list-container");
+  const listItems = listContainer.querySelectorAll(".item");
+  for (const item of listItems) {
+    item.draggable = true;
+  }
+}
