@@ -49,6 +49,7 @@ const initApp = () => {
   refreshThePage();
   renderAppStatus();
   updateTheme();
+  dragAndDropInit();
 };
 
 const loadListObject = () => {
@@ -71,7 +72,7 @@ const refreshThePage = () => {
   clearItemEntryField();
   //setFocusOnItemEntry();
   setItemsLeft();
-  dragAndDrop();
+  dragAndDropUpdate();
 };
 
 const clearListDisplay = () => {
@@ -286,12 +287,8 @@ const updateTheme = () => {
   }
 };
 
-const dragAndDrop = () => {
+const dragAndDropInit = () => {
   const listContainer = document.querySelector("#list-container");
-  const listItems = document.querySelectorAll(".item");
-  for (const item of listItems) {
-    item.draggable = true;
-  }
 
   listContainer.addEventListener("dragstart", (event) => {
     const dragStartElement = findItemParent(event.target);
@@ -367,4 +364,13 @@ const dragAndDrop = () => {
       }
     }
   };
+};
+
+const dragAndDropUpdate = () => {
+  //enable drageAndDrop if listItems were updated
+  const listContainer = document.querySelector("#list-container");
+  const listItems = listContainer.querySelectorAll(".item");
+  for (const item of listItems) {
+    item.draggable = true;
+  }
 };
